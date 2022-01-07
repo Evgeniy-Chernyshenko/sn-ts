@@ -1,0 +1,17 @@
+.post {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.post div {
+  align-self: center;
+}
+
+.post img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin-right: 20px;
+}

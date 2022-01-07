@@ -1,0 +1,15 @@
+.header {
+  grid-area: header;
+  background-color: #3b5998;
+}
+
+.header a {
+  display: inline-block;
+  margin-left: 10px;
+  height: 50px;
+}
+
+.header img {
+  height: 100%;
+  display: block;
+}

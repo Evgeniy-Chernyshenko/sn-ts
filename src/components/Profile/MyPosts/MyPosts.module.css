@@ -1,0 +1,31 @@
+.myPosts textarea {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-family: inherit;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+
+.myPosts button {
+  display: block;
+  float: right;
+  background-color: #3b5998;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.myPosts button:hover {
+  background-color: #2d4374;
+}
+
+.myPosts .addPost {
+  margin-bottom: 20px;
+  overflow: hidden;
+}

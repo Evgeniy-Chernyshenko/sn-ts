@@ -1,0 +1,20 @@
+.nav {
+  grid-area: nav;
+  background-color: #6679ac;
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 200%;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+}
