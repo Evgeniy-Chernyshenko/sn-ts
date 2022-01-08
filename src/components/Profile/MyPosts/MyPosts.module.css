@@ -10,7 +10,7 @@
   font-size: 0.9em;
 }
 
-.myPosts button {
+.addPost button {
   display: block;
   float: right;
   background-color: #3b5998;
@@ -21,11 +21,11 @@
   cursor: pointer;
 }
 
-.myPosts button:hover {
+.addPost button:hover {
   background-color: #2d4374;
 }
 
-.myPosts .addPost {
+.addPost {
   margin-bottom: 20px;
   overflow: hidden;
 }

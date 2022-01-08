@@ -3,15 +3,49 @@
   margin-bottom: 20px;
 }
 
-.post div {
+.post > div {
   align-self: center;
+  width: 100%;
 }
 
-.post img {
+.text {
+  margin-bottom: 10px;
+}
+
+.userpic {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 50%;
   display: block;
   margin-right: 20px;
+}
+
+.likeButton {
+  display: flex;
+  float: right;
+}
+
+.likeButton button {
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  display: block;
+  font-size: 2em;
+  border-radius: 50%;
+  background-color: rgb(238, 238, 238);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.likeButton button:hover {
+  background-color: rgb(221, 221, 221);
+}
+
+.likeButton span {
+  align-self: center;
+  color: gray;
 }
