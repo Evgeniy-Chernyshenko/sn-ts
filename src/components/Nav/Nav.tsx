@@ -1,14 +1,25 @@
-import styles from './Nav.module.css';
+import { NavLink } from "react-router-dom";
+import styles from "./Nav.module.css";
 
 const Nav = () => {
   return (
     <nav className={styles.nav}>
       <ul>
         <li>
-          <a href="#1">Profile</a>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Profile
+          </NavLink>
         </li>
         <li>
-          <a href="#2">Messages</a>
+          <NavLink
+            to="/messages"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Messages
+          </NavLink>
         </li>
         <li>
           <a href="#3">News</a>

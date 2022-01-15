@@ -1,10 +1,10 @@
-import styles from './MyPosts.module.css';
-import Post from './Post/Post';
+import styles from "./MyPosts.module.css";
+import Post from "./Post/Post";
 
 const MyPosts = () => {
   return (
     <div className={styles.myPosts}>
-      <h2>My posts</h2>
+      <h3>My posts</h3>
       <div className={styles.addPost}>
         <textarea placeholder="Type your text here..."></textarea>
         <button>Send post</button>
