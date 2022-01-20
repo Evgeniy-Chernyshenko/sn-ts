@@ -1,8 +1,12 @@
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import styles from "./Profile.module.css";
+import { ProfilePageType } from "../../redux/state";
 
-const Profile = () => {
+type PropsType = {
+  data: ProfilePageType;
+};
+
+const Profile = (props: PropsType) => {
   return (
     <div>
       <h1>Profile</h1>
@@ -19,7 +23,7 @@ const Profile = () => {
           "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
         }
       />
-      <MyPosts />
+      <MyPosts posts={props.data.posts} />
     </div>
   );
 };

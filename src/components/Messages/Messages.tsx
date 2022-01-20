@@ -1,63 +1,35 @@
 import styles from "./Messages.module.css";
-import { NavLink } from "react-router-dom";
+import MessageSender from "./MessageSender/MessageSender";
+import MessageItem from "./MessageItem/MessageItem";
+import { MessagesPageType } from "../../redux/state";
 
-type MessageSenderType = {
-  id: number;
-  name: string;
+type PropsType = {
+  data: MessagesPageType;
 };
 
-const MessageSender = (props: MessageSenderType) => {
-  return (
-    <li>
-      <NavLink to={`/messages/${props.id}`}>{props.name}</NavLink>
-    </li>
+const Messages = (props: PropsType) => {
+  const messageSendersElements = props.data.messageSenders.map(
+    (messageSender) => (
+      <MessageSender id={messageSender.id} name={messageSender.name} />
+    )
   );
-};
 
-type MessageItemType = {
-  name: string;
-  avatar: string;
-  text: string;
-};
+  const messageItemsElements = props.data.messageItems.map((messageItem) => (
+    <MessageItem
+      name="Petya"
+      avatar="https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg"
+      text={messageItem.text}
+    />
+  ));
 
-const MessageItem = (props: MessageItemType) => {
-  return (
-    <div className={styles.messageItem}>
-      <div className={styles.avatar}>
-        <img src={props.avatar} alt={props.name} />
-        {props.name}
-      </div>
-      <div className={styles.text}>{props.text}</div>
-    </div>
-  );
-};
-
-const Messages = () => {
   return (
     <div className={styles.messages}>
       <h1>Messages</h1>
       <div className={styles.messagesContainer}>
         <div className={styles.messagesSenders}>
-          <ul>
-            <MessageSender id={1} name="Vasiliy" />
-            <MessageSender id={2} name="Petr" />
-            <MessageSender id={3} name="Masha" />
-            <MessageSender id={4} name="Bill Gates" />
-            <MessageSender id={5} name="Mark Zuckerberg" />
-          </ul>
+          <ul>{messageSendersElements}</ul>
         </div>
-        <div className={styles.messageItems}>
-          <MessageItem
-            name="Petya"
-            avatar="https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg"
-            text="Hello World!"
-          />
-          <MessageItem
-            name="Vasya"
-            avatar="data:image/jpeg;base64,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"
-            text="Bye World!"
-          />
-        </div>
+        <div className={styles.messageItems}>{messageItemsElements}</div>
       </div>
     </div>
   );
