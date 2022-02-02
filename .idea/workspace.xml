@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8cd9cf62-44d3-4234-a211-15a6d398233f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Messages/MessageItem/MessageItem.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Messages/MessageItem/MessageItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Messages/MessageSender/MessageSender.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Messages/MessageSender/MessageSender.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Messages/Messages.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Messages/Messages.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Messages/Messages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="8cd9cf62-44d3-4234-a211-15a6d398233f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,6 +48,7 @@
       <workItem from="1642520836233" duration="2488000" />
       <workItem from="1642554164024" duration="877000" />
       <workItem from="1642602983169" duration="7527000" />
+      <workItem from="1642715457993" duration="55000" />
     </task>
     <servers />
   </component>

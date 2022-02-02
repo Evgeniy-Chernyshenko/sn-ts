@@ -1,9 +1,17 @@
-import styles from "./MyPosts.module.css";
-import Post from "./Post/Post";
-import { PostsType } from "../../../redux/state";
+import React from 'react';
+import styles from './MyPosts.module.css';
+import Post from './Post/Post';
+import {
+  AddPostType,
+  ChangeNewPostTextType,
+  PostsType,
+} from '../../../redux/state';
 
 type PropsType = {
   posts: PostsType;
+  newPostText: string;
+  addPost: AddPostType;
+  changeNewPostText: ChangeNewPostTextType;
 };
 
 const MyPosts = (props: PropsType) => {
@@ -16,12 +24,21 @@ const MyPosts = (props: PropsType) => {
     />
   ));
 
+  const addPost = () => {
+    props.addPost(props.newPostText);
+    props.changeNewPostText('');
+  };
+
   return (
     <div className={styles.myPosts}>
       <h3>My posts</h3>
       <div className={styles.addPost}>
-        <textarea placeholder="Type your text here..."></textarea>
-        <button>Send post</button>
+        <textarea
+          value={props.newPostText}
+          onChange={(e) => props.changeNewPostText(e.currentTarget.value)}
+          placeholder="Type your text here..."
+        ></textarea>
+        <button onClick={addPost}>Send post</button>
       </div>
       <div className={styles.postsList}>{postsElements}</div>
     </div>

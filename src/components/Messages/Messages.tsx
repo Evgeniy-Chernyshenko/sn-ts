@@ -1,7 +1,8 @@
-import styles from "./Messages.module.css";
-import MessageSender from "./MessageSender/MessageSender";
-import MessageItem from "./MessageItem/MessageItem";
-import { MessagesPageType } from "../../redux/state";
+import React from 'react';
+import styles from './Messages.module.css';
+import MessageSender from './MessageSender/MessageSender';
+import MessageItem from './MessageItem/MessageItem';
+import { MessagesPageType } from '../../redux/state';
 
 type PropsType = {
   data: MessagesPageType;
@@ -22,6 +23,12 @@ const Messages = (props: PropsType) => {
     />
   ));
 
+  const textAreaRef = React.createRef<HTMLTextAreaElement>();
+
+  const addMessage = () => {
+    alert(textAreaRef.current?.value);
+  };
+
   return (
     <div className={styles.messages}>
       <h1>Messages</h1>
@@ -29,7 +36,14 @@ const Messages = (props: PropsType) => {
         <div className={styles.messagesSenders}>
           <ul>{messageSendersElements}</ul>
         </div>
-        <div className={styles.messageItems}>{messageItemsElements}</div>
+        <div>
+          {messageItemsElements}
+          <textarea
+            ref={textAreaRef}
+            placeholder="Type your message here..."
+          ></textarea>
+          <button onClick={addMessage}>Send message</button>
+        </div>
       </div>
     </div>
   );

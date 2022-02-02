@@ -1,14 +1,16 @@
-import React from "react";
-import "./App.css";
-import Header from "./components/Header/Header";
-import Nav from "./components/Nav/Nav";
-import Profile from "./components/Profile/Profile";
-import Messages from "./components/Messages/Messages";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { StateType } from "./redux/state";
+import React from 'react';
+import './App.css';
+import Header from './components/Header/Header';
+import Nav from './components/Nav/Nav';
+import Profile from './components/Profile/Profile';
+import Messages from './components/Messages/Messages';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AddPostType, ChangeNewPostTextType, StateType } from './redux/state';
 
 type PropsType = {
   state: StateType;
+  addPost: AddPostType;
+  changeNewPostText: ChangeNewPostTextType;
 };
 
 const App: React.FC<PropsType> = (props) => {
@@ -21,7 +23,13 @@ const App: React.FC<PropsType> = (props) => {
           <Routes>
             <Route
               path="/profile"
-              element={<Profile data={props.state.profilePage} />}
+              element={
+                <Profile
+                  data={props.state.profilePage}
+                  addPost={props.addPost}
+                  changeNewPostText={props.changeNewPostText}
+                />
+              }
             />
             <Route
               path="/messages"
