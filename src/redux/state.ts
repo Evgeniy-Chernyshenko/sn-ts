@@ -1,5 +1,3 @@
-import { rerenderEntireTree } from './../rerender';
-
 type MessageSenderType = {
   id: number;
   name: string;
@@ -23,11 +21,12 @@ type PostType = {
 export type PostsType = PostType[];
 
 export type ProfilePageType = {
-  NewPostText: string;
+  newPostText: string;
   posts: PostsType;
 };
 
 export type MessagesPageType = {
+  newMessageText: string;
   messageSenders: MessageSendersType;
   messageItems: MessageItemsType;
 };
@@ -37,25 +36,51 @@ export type StateType = {
   messagesPage: MessagesPageType;
 };
 
-export type AddPostType = (text: string) => void;
+export type AddPostType = () => void;
 
-export const addPost: AddPostType = (text) => {
-  state.profilePage.posts.push({ id: 4, text, likesCount: 0 });
+export const addPost: AddPostType = () => {
+  state.profilePage.posts.push({
+    id: 4,
+    text: state.profilePage.newPostText,
+    likesCount: 0,
+  });
 
-  rerenderEntireTree(state, addPost, changeNewPostText);
+  state.profilePage.newPostText = '';
+
+  rerenderEntireTree(state);
 };
 
 export type ChangeNewPostTextType = (text: string) => void;
 
 export const changeNewPostText: ChangeNewPostTextType = (text) => {
-  state.profilePage.NewPostText = text;
+  state.profilePage.newPostText = text;
 
-  rerenderEntireTree(state, addPost, changeNewPostText);
+  rerenderEntireTree(state);
+};
+
+export type AddMessageType = () => void;
+
+export const addMessage: AddMessageType = () => {
+  state.messagesPage.messageItems.push({
+    id: 3,
+    text: state.messagesPage.newMessageText,
+  });
+  state.messagesPage.newMessageText = '';
+
+  rerenderEntireTree(state);
+};
+
+export type ChangeNewMessageTextType = (text: string) => void;
+
+export const changeNewMessageText: ChangeNewMessageTextType = (text) => {
+  state.messagesPage.newMessageText = text;
+
+  rerenderEntireTree(state);
 };
 
 let state: StateType = {
   profilePage: {
-    NewPostText: '',
+    newPostText: '',
     posts: [
       {
         id: 1,
@@ -75,6 +100,7 @@ let state: StateType = {
     ],
   },
   messagesPage: {
+    newMessageText: '',
     messageSenders: [
       { id: 1, name: 'Vasiliy' },
       { id: 2, name: 'Petr' },
@@ -87,6 +113,13 @@ let state: StateType = {
       { id: 2, text: 'Bye World!' },
     ],
   },
+};
+
+export type RerenderEntireTreeType = (state: StateType) => void;
+
+let rerenderEntireTree: RerenderEntireTreeType;
+export const subscribe = (callback: RerenderEntireTreeType) => {
+  rerenderEntireTree = callback;
 };
 
 export default state;

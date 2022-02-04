@@ -31,7 +31,7 @@ const Profile = (props: PropsType) => {
       />
       <MyPosts
         posts={props.data.posts}
-        newPostText={props.data.NewPostText}
+        newPostText={props.data.newPostText}
         addPost={props.addPost}
         changeNewPostText={props.changeNewPostText}
       />

@@ -17,6 +17,7 @@ type PropsType = {
 const MyPosts = (props: PropsType) => {
   const postsElements = props.posts.map((post) => (
     <Post
+      key={post.id}
       userPic="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
       userName="1 Evgeniy Ch."
       text={post.text}
@@ -25,8 +26,7 @@ const MyPosts = (props: PropsType) => {
   ));
 
   const addPost = () => {
-    props.addPost(props.newPostText);
-    props.changeNewPostText('');
+    props.addPost();
   };
 
   return (
@@ -37,7 +37,7 @@ const MyPosts = (props: PropsType) => {
           value={props.newPostText}
           onChange={(e) => props.changeNewPostText(e.currentTarget.value)}
           placeholder="Type your text here..."
-        ></textarea>
+        />
         <button onClick={addPost}>Send post</button>
       </div>
       <div className={styles.postsList}>{postsElements}</div>

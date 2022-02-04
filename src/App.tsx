@@ -5,12 +5,20 @@ import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
 import Messages from './components/Messages/Messages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AddPostType, ChangeNewPostTextType, StateType } from './redux/state';
+import {
+  AddPostType,
+  ChangeNewPostTextType,
+  StateType,
+  AddMessageType,
+  ChangeNewMessageTextType,
+} from './redux/state';
 
 type PropsType = {
   state: StateType;
   addPost: AddPostType;
   changeNewPostText: ChangeNewPostTextType;
+  addMessage: AddMessageType;
+  changeNewMessageText: ChangeNewMessageTextType;
 };
 
 const App: React.FC<PropsType> = (props) => {
@@ -33,7 +41,13 @@ const App: React.FC<PropsType> = (props) => {
             />
             <Route
               path="/messages"
-              element={<Messages data={props.state.messagesPage} />}
+              element={
+                <Messages
+                  data={props.state.messagesPage}
+                  addMessage={props.addMessage}
+                  changeNewMessageText={props.changeNewMessageText}
+                />
+              }
             />
           </Routes>
         </main>
