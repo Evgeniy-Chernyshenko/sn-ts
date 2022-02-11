@@ -1,15 +1,10 @@
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {
-  AddPostType,
-  ChangeNewPostTextType,
-  ProfilePageType,
-} from '../../redux/state';
+import { ProfilePageType, DispatchType } from '../../redux/store';
 
 type PropsType = {
   data: ProfilePageType;
-  addPost: AddPostType;
-  changeNewPostText: ChangeNewPostTextType;
+  dispatch: DispatchType;
 };
 
 const Profile = (props: PropsType) => {
@@ -32,8 +27,7 @@ const Profile = (props: PropsType) => {
       <MyPosts
         posts={props.data.posts}
         newPostText={props.data.newPostText}
-        addPost={props.addPost}
-        changeNewPostText={props.changeNewPostText}
+        dispatch={props.dispatch}
       />
     </div>
   );

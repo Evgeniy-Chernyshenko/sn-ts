@@ -1,17 +1,16 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import { PostsType, DispatchType } from '../../../redux/store';
 import {
-  AddPostType,
-  ChangeNewPostTextType,
-  PostsType,
-} from '../../../redux/state';
+  addPostAC,
+  changeNewPostTextAC,
+} from '../../../redux/profile-page-reducer';
 
 type PropsType = {
   posts: PostsType;
   newPostText: string;
-  addPost: AddPostType;
-  changeNewPostText: ChangeNewPostTextType;
+  dispatch: DispatchType;
 };
 
 const MyPosts = (props: PropsType) => {
@@ -25,8 +24,12 @@ const MyPosts = (props: PropsType) => {
     />
   ));
 
-  const addPost = () => {
-    props.addPost();
+  const onChangeNewPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    props.dispatch(changeNewPostTextAC(e.currentTarget.value));
+  };
+
+  const onClickSendPostHandler = () => {
+    props.dispatch(addPostAC());
   };
 
   return (
@@ -35,10 +38,10 @@ const MyPosts = (props: PropsType) => {
       <div className={styles.addPost}>
         <textarea
           value={props.newPostText}
-          onChange={(e) => props.changeNewPostText(e.currentTarget.value)}
+          onChange={onChangeNewPostTextHandler}
           placeholder="Type your text here..."
         />
-        <button onClick={addPost}>Send post</button>
+        <button onClick={onClickSendPostHandler}>Send post</button>
       </div>
       <div className={styles.postsList}>{postsElements}</div>
     </div>
