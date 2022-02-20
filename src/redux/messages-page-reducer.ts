@@ -42,11 +42,3 @@ export const messagesPageReducer = (
     }
   }
 };
-
-export const changeNewMessageTextAC = (text: string) =>
-  ({
-    type: "CHANGE-NEW-MESSAGE-TEXT",
-    text,
-  } as const);
-
-export const addMessageAC = () => ({ type: "ADD-MESSAGE" } as const);

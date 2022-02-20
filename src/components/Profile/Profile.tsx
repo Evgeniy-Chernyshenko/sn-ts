@@ -2,6 +2,8 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { ProfilePageType } from "../../types/entities-types";
 import { DispatchType } from "../../types/redux-types";
+import { StoreContext } from "../../StoreContext";
+import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
 
 type PropsType = {
   data: ProfilePageType;
@@ -25,11 +27,7 @@ const Profile = (props: PropsType) => {
           "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
         }
       />
-      <MyPosts
-        posts={props.data.posts}
-        newPostText={props.data.newPostText}
-        dispatch={props.dispatch}
-      />
+      <MyPostsContainer />
     </div>
   );
 };

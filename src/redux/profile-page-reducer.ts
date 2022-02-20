@@ -50,11 +50,3 @@ export const profilePageReducer = (
     }
   }
 };
-
-export const changeNewPostTextAC = (text: string) =>
-  ({
-    type: "CHANGE-NEW-POST-TEXT",
-    text,
-  } as const);
-
-export const addPostAC = () => ({ type: "ADD-POST" } as const);

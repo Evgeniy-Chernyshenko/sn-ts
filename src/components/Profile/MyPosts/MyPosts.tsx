@@ -1,17 +1,13 @@
 import { ChangeEvent } from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {
-  addPostAC,
-  changeNewPostTextAC,
-} from "../../../redux/profile-page-reducer";
-import { DispatchType } from "../../../types/redux-types";
 import { PostsType } from "../../../types/entities-types";
 
 type PropsType = {
   posts: PostsType;
   newPostText: string;
-  dispatch: DispatchType;
+  changeNewPostText: (value: string) => void;
+  addPost: () => void;
 };
 
 const MyPosts = (props: PropsType) => {
@@ -26,11 +22,11 @@ const MyPosts = (props: PropsType) => {
   ));
 
   const onChangeNewPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(changeNewPostTextAC(e.currentTarget.value));
+    props.changeNewPostText(e.currentTarget.value);
   };
 
   const onClickSendPostHandler = () => {
-    props.dispatch(addPostAC());
+    props.addPost();
   };
 
   return (

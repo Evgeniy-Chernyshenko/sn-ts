@@ -2,10 +2,7 @@ import { ChangeEvent } from "react";
 import styles from "./Messages.module.css";
 import MessageSender from "./MessageSender/MessageSender";
 import MessageItem from "./MessageItem/MessageItem";
-import {
-  addMessageAC,
-  changeNewMessageTextAC,
-} from "../../redux/messages-page-reducer";
+import { actionCreators } from "../../redux/action-creators";
 import { MessagesPageType } from "../../types/entities-types";
 import { DispatchType } from "../../types/redux-types";
 
@@ -35,11 +32,13 @@ const Messages = (props: PropsType) => {
   ));
 
   const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(changeNewMessageTextAC(e.currentTarget.value));
+    props.dispatch(
+      actionCreators.changeNewMessageTextAC(e.currentTarget.value)
+    );
   };
 
   const onClickSendMessageHandler = () => {
-    props.dispatch(addMessageAC());
+    props.dispatch(actionCreators.addMessageAC());
   };
 
   return (

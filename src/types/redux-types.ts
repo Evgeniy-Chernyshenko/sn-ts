@@ -1,20 +1,12 @@
-import {
-  addMessageAC,
-  changeNewMessageTextAC,
-} from "../redux/messages-page-reducer";
-import { addPostAC, changeNewPostTextAC } from "../redux/profile-page-reducer";
-import { EmptyObject } from "redux";
-import { MessagesPageType, ProfilePageType } from "./entities-types";
+import { actionCreators } from "../redux/action-creators";
+import { reducer, store } from "../redux/store";
 
-export type ActionType =
-  | ReturnType<typeof changeNewMessageTextAC>
-  | ReturnType<typeof addMessageAC>
-  | ReturnType<typeof changeNewPostTextAC>
-  | ReturnType<typeof addPostAC>;
+type ActionCreatorsType = typeof actionCreators;
+type ActionCreatorsTypeKeys = keyof ActionCreatorsType;
+export type ActionType = ReturnType<ActionCreatorsType[ActionCreatorsTypeKeys]>;
 
 export type DispatchType = (action: ActionType) => void;
 
-export type StateType = EmptyObject & {
-  profilePage: ProfilePageType;
-  messagesPage: MessagesPageType;
-};
+export type StateType = ReturnType<typeof reducer>;
+
+export type StoreType = typeof store;

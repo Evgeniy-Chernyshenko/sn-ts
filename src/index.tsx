@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/store";
 import { DispatchType, StateType } from "./types/redux-types";
+import { StoreContext } from "./StoreContext";
 
 type RerenderEntireTreeType = (
   state: StateType,
@@ -14,7 +15,9 @@ type RerenderEntireTreeType = (
 export const rerenderEntireTree: RerenderEntireTreeType = (state, dispatch) =>
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} dispatch={dispatch} />
+      <StoreContext.Provider value={store}>
+        <App state={state} dispatch={dispatch} />
+      </StoreContext.Provider>
     </React.StrictMode>,
     document.getElementById("root")
   );

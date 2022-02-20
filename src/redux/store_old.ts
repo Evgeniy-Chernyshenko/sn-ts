@@ -2,12 +2,12 @@ import {
   addMessageAC,
   changeNewMessageTextAC,
   messagesPageReducer,
-} from "./messages-page-reducer";
+} from "./messages-page-reducer_old";
 import {
   addPostAC,
   changeNewPostTextAC,
   profilePageReducer,
-} from "./profile-page-reducer";
+} from "./profile-page-reducer_old";
 
 type MessageSenderType = {
   id: number;
