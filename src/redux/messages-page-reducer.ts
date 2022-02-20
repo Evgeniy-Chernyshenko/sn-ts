@@ -1,5 +1,5 @@
 import { MessagesPageType } from "../types/entities-types";
-import { ReduxTypes } from "../types/redux-types";
+import { ActionType } from "../types/redux-types";
 
 const initialState: MessagesPageType = {
   newMessageText: "",
@@ -18,7 +18,7 @@ const initialState: MessagesPageType = {
 
 export const messagesPageReducer = (
   state = initialState,
-  action: ReduxTypes
+  action: ActionType
 ) => {
   switch (action.type) {
     case "CHANGE-NEW-MESSAGE-TEXT": {

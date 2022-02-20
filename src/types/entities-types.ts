@@ -4,7 +4,7 @@ type PostType = {
   likesCount: number;
 };
 
-type PostsType = PostType[];
+export type PostsType = PostType[];
 
 export type ProfilePageType = {
   newPostText: string;

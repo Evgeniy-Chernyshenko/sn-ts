@@ -1,11 +1,12 @@
 import { ChangeEvent } from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { PostsType, DispatchType } from "../../../redux/store_old";
 import {
   addPostAC,
   changeNewPostTextAC,
 } from "../../../redux/profile-page-reducer";
+import { DispatchType } from "../../../types/redux-types";
+import { PostsType } from "../../../types/entities-types";
 
 type PropsType = {
   posts: PostsType;

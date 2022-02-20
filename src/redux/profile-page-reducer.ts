@@ -1,5 +1,5 @@
 import { ProfilePageType } from "../types/entities-types";
-import { ReduxTypes } from "../types/redux-types";
+import { ActionType } from "../types/redux-types";
 
 const initialState: ProfilePageType = {
   newPostText: "",
@@ -24,7 +24,7 @@ const initialState: ProfilePageType = {
 
 export const profilePageReducer = (
   state = initialState,
-  action: ReduxTypes
+  action: ActionType
 ) => {
   switch (action.type) {
     case "CHANGE-NEW-POST-TEXT": {

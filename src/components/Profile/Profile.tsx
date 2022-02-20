@@ -1,6 +1,7 @@
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { ProfilePageType, DispatchType } from "../../redux/store_old";
+import { ProfilePageType } from "../../types/entities-types";
+import { DispatchType } from "../../types/redux-types";
 
 type PropsType = {
   data: ProfilePageType;
