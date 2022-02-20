@@ -1,14 +1,13 @@
-import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import Nav from './components/Nav/Nav';
-import Profile from './components/Profile/Profile';
-import Messages from './components/Messages/Messages';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { StateType, DispatchType, StoreType } from './redux/store';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header/Header";
+import Nav from "./components/Nav/Nav";
+import Profile from "./components/Profile/Profile";
+import Messages from "./components/Messages/Messages";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { DispatchType, StateType } from "./types/redux-types";
 
 type PropsType = {
-  store: StoreType;
   state: StateType;
   dispatch: DispatchType;
 };
@@ -32,7 +31,12 @@ const App: React.FC<PropsType> = (props) => {
             />
             <Route
               path="/messages"
-              element={<Messages store={props.store} />}
+              element={
+                <Messages
+                  data={props.state.messagesPage}
+                  dispatch={props.dispatch}
+                />
+              }
             />
           </Routes>
         </main>

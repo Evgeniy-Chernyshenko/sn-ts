@@ -1,25 +1,11 @@
-import { MessagesPageType } from "../types/entities-types";
-import { ReduxTypes } from "../types/redux-types";
+import { ActionType, MessagesPageType } from "./store_old";
 
-const initialState: MessagesPageType = {
-  newMessageText: "",
-  messageSenders: [
-    { id: 1, name: "Vasiliy" },
-    { id: 2, name: "Petr" },
-    { id: 3, name: "Masha" },
-    { id: 4, name: "Bill Gates" },
-    { id: 5, name: "Mark Zuckerberg" },
-  ],
-  messageItems: [
-    { id: 1, text: "Hello World!!!" },
-    { id: 2, text: "Bye World!" },
-  ],
-};
+type MessagesPageReducerType = (
+  state: MessagesPageType,
+  action: ActionType
+) => MessagesPageType;
 
-export const messagesPageReducer = (
-  state = initialState,
-  action: ReduxTypes
-) => {
+export const messagesPageReducer: MessagesPageReducerType = (state, action) => {
   switch (action.type) {
     case "CHANGE-NEW-MESSAGE-TEXT": {
       state.newMessageText = action.text;

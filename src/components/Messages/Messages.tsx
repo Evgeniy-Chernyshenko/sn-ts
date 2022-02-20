@@ -1,29 +1,31 @@
-import { ChangeEvent } from 'react';
-import styles from './Messages.module.css';
-import MessageSender from './MessageSender/MessageSender';
-import MessageItem from './MessageItem/MessageItem';
-import { StoreType } from '../../redux/store';
+import { ChangeEvent } from "react";
+import styles from "./Messages.module.css";
+import MessageSender from "./MessageSender/MessageSender";
+import MessageItem from "./MessageItem/MessageItem";
 import {
   addMessageAC,
   changeNewMessageTextAC,
-} from '../../redux/messages-page-reducer';
+} from "../../redux/messages-page-reducer";
+import { MessagesPageType } from "../../types/entities-types";
+import { DispatchType } from "../../types/redux-types";
 
 type PropsType = {
-  store: StoreType;
+  data: MessagesPageType;
+  dispatch: DispatchType;
 };
 
 const Messages = (props: PropsType) => {
-  const store = props.store.getState().messagesPage;
+  const messageSendersElements = props.data.messageSenders.map(
+    (messageSender) => (
+      <MessageSender
+        key={messageSender.id}
+        id={messageSender.id}
+        name={messageSender.name}
+      />
+    )
+  );
 
-  const messageSendersElements = store.messageSenders.map((messageSender) => (
-    <MessageSender
-      key={messageSender.id}
-      id={messageSender.id}
-      name={messageSender.name}
-    />
-  ));
-
-  const messageItemsElements = store.messageItems.map((messageItem) => (
+  const messageItemsElements = props.data.messageItems.map((messageItem) => (
     <MessageItem
       key={messageItem.id}
       name="Petya"
@@ -33,11 +35,11 @@ const Messages = (props: PropsType) => {
   ));
 
   const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.store.dispatch(changeNewMessageTextAC(e.currentTarget.value));
+    props.dispatch(changeNewMessageTextAC(e.currentTarget.value));
   };
 
   const onClickSendMessageHandler = () => {
-    props.store.dispatch(addMessageAC());
+    props.dispatch(addMessageAC());
   };
 
   return (
@@ -51,7 +53,7 @@ const Messages = (props: PropsType) => {
           {messageItemsElements}
           <textarea
             placeholder="Type your message here..."
-            value={store.newMessageText}
+            value={props.data.newMessageText}
             onChange={onChangeMessageTextHandler}
           ></textarea>
           <button onClick={onClickSendMessageHandler}>Send message</button>
