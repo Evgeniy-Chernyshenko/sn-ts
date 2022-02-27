@@ -1,0 +1,53 @@
+.users {
+}
+
+.user {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.userName {
+  font-weight: bold;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.right {
+  border: 1px solid #d1d1d1;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-grow: 1;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.users button {
+  display: block;
+  background-color: #3b5998;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.showMore {
+  margin: 0 auto;
+}

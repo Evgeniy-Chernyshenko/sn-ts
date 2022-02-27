@@ -1,28 +1,23 @@
-import { ChangeEvent } from "react";
-import styles from "./Messages.module.css";
-import MessageSender from "./MessageSender/MessageSender";
-import MessageItem from "./MessageItem/MessageItem";
-import { actionCreators } from "../../redux/action-creators";
-import { MessagesPageType } from "../../types/entities-types";
-import { DispatchType } from "../../types/redux-types";
+import { ChangeEvent } from 'react';
+import styles from './Messages.module.css';
+import MessageSender from './MessageSender/MessageSender';
+import MessageItem from './MessageItem/MessageItem';
+import { DispatchProps, StateProps } from './MessagesContainer';
 
-type PropsType = {
-  data: MessagesPageType;
-  dispatch: DispatchType;
-};
+type PropsType = StateProps & DispatchProps;
 
 const Messages = (props: PropsType) => {
-  const messageSendersElements = props.data.messageSenders.map(
-    (messageSender) => (
-      <MessageSender
-        key={messageSender.id}
-        id={messageSender.id}
-        name={messageSender.name}
-      />
-    )
-  );
+  console.log(props);
 
-  const messageItemsElements = props.data.messageItems.map((messageItem) => (
+  const messageSendersElements = props.messageSenders.map((messageSender) => (
+    <MessageSender
+      key={messageSender.id}
+      id={messageSender.id}
+      name={messageSender.name}
+    />
+  ));
+
+  const messageItemsElements = props.messageItems.map((messageItem) => (
     <MessageItem
       key={messageItem.id}
       name="Petya"
@@ -32,13 +27,11 @@ const Messages = (props: PropsType) => {
   ));
 
   const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(
-      actionCreators.changeNewMessageTextAC(e.currentTarget.value)
-    );
+    props.changeNewMessageText(e.currentTarget.value);
   };
 
   const onClickSendMessageHandler = () => {
-    props.dispatch(actionCreators.addMessageAC());
+    props.addMessage();
   };
 
   return (
@@ -52,7 +45,7 @@ const Messages = (props: PropsType) => {
           {messageItemsElements}
           <textarea
             placeholder="Type your message here..."
-            value={props.data.newMessageText}
+            value={props.newMessageText}
             onChange={onChangeMessageTextHandler}
           ></textarea>
           <button onClick={onClickSendMessageHandler}>Send message</button>

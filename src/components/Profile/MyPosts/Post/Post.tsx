@@ -9,6 +9,8 @@ type PostType = {
 };
 
 const Post = (props: PostType) => {
+  console.log('Render post');
+
   return (
     <div className={styles.post}>
       <img

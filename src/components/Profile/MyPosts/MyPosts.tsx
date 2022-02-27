@@ -1,14 +1,9 @@
-import { ChangeEvent } from "react";
-import styles from "./MyPosts.module.css";
-import Post from "./Post/Post";
-import { PostsType } from "../../../types/entities-types";
+import { ChangeEvent } from 'react';
+import styles from './MyPosts.module.css';
+import { DispatchProps, StateProps } from './MyPostsContainer';
+import Post from './Post/Post';
 
-type PropsType = {
-  posts: PostsType;
-  newPostText: string;
-  changeNewPostText: (value: string) => void;
-  addPost: () => void;
-};
+type PropsType = StateProps & DispatchProps;
 
 const MyPosts = (props: PropsType) => {
   const postsElements = props.posts.map((post) => (

@@ -1,4 +1,4 @@
-import styles from "./ProfileInfo.module.css";
+import styles from './ProfileInfo.module.css';
 
 type ProfileInfoType = {
   name: string;
@@ -13,7 +13,7 @@ type ProfileInfoType = {
 const ProfileInfo = (props: ProfileInfoType) => {
   return (
     <>
-      <img className={styles.topImage} src={props.topImage} alt="Top image" />
+      <img className={styles.topImage} src={props.topImage} alt="Top" />
 
       <div className={styles.about}>
         <img src={props.avatar} alt={props.name} />
@@ -24,7 +24,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
             <li>City: {props.city}</li>
             <li>Education: {props.education}</li>
             <li>
-              Web site:{" "}
+              Web site:{' '}
               <a href={props.webSiteUrl} target="_blank" rel="noreferrer">
                 {props.webSiteUrl}
               </a>
