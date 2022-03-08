@@ -1,10 +1,10 @@
 type UserType = {
+  followed: boolean;
   id: number;
   name: string;
-  statusText: string;
-  userPic: string;
-  followed: boolean;
-  location: { country: string; city: string };
+  photos: { small: string | null; large: string | null };
+  status: string | null;
+  uniqueUrlName: string | null;
 };
 
 export type UsersType = UserType[];
@@ -13,15 +13,18 @@ export type UsersPageType = {
   users: UsersType;
 };
 
-type ActionCreatorsType = typeof usersPageAC;
-type ActionCreatorsTypeKeys = keyof ActionCreatorsType;
-type ActionCreatorType = ReturnType<ActionCreatorsType[ActionCreatorsTypeKeys]>;
+// type ActionCreatorsType = typeof usersPageAC;
+// type ActionCreatorsTypeKeys = keyof ActionCreatorsType;
+// type ActionCreatorType = ReturnType<ActionCreatorsType[ActionCreatorsTypeKeys]>;
+
+type ActionCreatorsType<T> = T extends { [key: string]: infer V } ? V : never;
+type ActionType = ReturnType<ActionCreatorsType<typeof usersPageAC>>;
 
 const initialState = { users: [] };
 
 export const usersPageReducer = (
   state: UsersPageType = initialState,
-  action: ActionCreatorType
+  action: ActionType
 ): UsersPageType => {
   switch (action.type) {
     case 'FOLLOW_USER':
