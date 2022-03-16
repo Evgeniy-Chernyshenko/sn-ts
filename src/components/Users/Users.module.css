@@ -39,7 +39,6 @@
 }
 
 .users button {
-  display: block;
   background-color: #3b5998;
   color: #ffffff;
   border: none;
@@ -48,6 +47,23 @@
   cursor: pointer;
 }
 
-.showMore {
-  margin: 0 auto;
+.pagination {
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.pagination button {
+  display: inline-block;
+  margin: 10px 0 0 10px;
+}
+
+.pagination button:not(.active) {
+  background-color: #dddddd;
+  color: #000000;
+}
+
+.pagination button.active {
+  background-color: #3b5998;
+  color: #ffffff;
+  cursor: default;
 }

@@ -6,9 +6,36 @@ type PostType = {
 
 export type PostsType = PostType[];
 
+type ContactsType = {
+  facebook: string;
+  github: string;
+  instagram: string;
+  mainLink: string;
+  twitter: string;
+  vk: string;
+  website: string;
+  youtube: string;
+};
+
+type PhotosType = {
+  large: string;
+  small: string;
+};
+
+export type ProfileType = {
+  aboutMe: string;
+  contacts: ContactsType;
+  fullName: string;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  photos: PhotosType;
+  userId: number;
+};
+
 type ProfilePageType = {
   newPostText: string;
   posts: PostsType;
+  profile: ProfileType;
 };
 
 type ActionCreatorsType = typeof profilePageAC;
@@ -34,6 +61,7 @@ const initialState = {
       likesCount: 3,
     },
   ],
+  profile: {} as ProfileType,
 };
 
 export const profilePageReducer = (
@@ -41,11 +69,11 @@ export const profilePageReducer = (
   action: ActionType
 ): ProfilePageType => {
   switch (action.type) {
-    case 'CHANGE-NEW-POST-TEXT': {
+    case 'CHANGE_NEW_POST_TEXT': {
       return { ...state, newPostText: action.text };
     }
 
-    case 'ADD-POST': {
+    case 'ADD_POST': {
       return {
         ...state,
         posts: [
@@ -60,6 +88,10 @@ export const profilePageReducer = (
       };
     }
 
+    case 'SET_INFO': {
+      return { ...state, profile: action.info };
+    }
+
     default: {
       return state;
     }
@@ -67,13 +99,14 @@ export const profilePageReducer = (
 };
 
 export const profilePageAC = {
-  changeNewPostTextAC: (text: string) => {
+  changeNewPostText: (text: string) => {
     return {
-      type: 'CHANGE-NEW-POST-TEXT',
+      type: 'CHANGE_NEW_POST_TEXT',
       text,
     } as const;
   },
-  addPostAC: () => {
-    return { type: 'ADD-POST' } as const;
+  addPost: () => {
+    return { type: 'ADD_POST' } as const;
   },
+  setProfile: (info: ProfileType) => ({ type: 'SET_INFO', info } as const),
 };

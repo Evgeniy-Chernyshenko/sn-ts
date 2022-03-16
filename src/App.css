@@ -5,9 +5,10 @@
   grid-template-rows: 50px 1fr;
   grid-template-columns: 150px 1fr;
   grid-template-areas:
-    "header header"
-    "nav main";
+    'header header'
+    'nav main';
   padding: 0 20px;
+  word-break: break-all;
 }
 
 main {

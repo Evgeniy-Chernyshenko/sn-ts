@@ -1,27 +1,40 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Profile from './components/Profile/Profile';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { MessagesContainer } from './components/Messages/MessagesContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
+import { ProfileContainer } from './components/Profile/ProfileContainer';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="app-wrapper">
         <Header />
         <Nav />
         <main>
-          <Routes>
-            <Route path="/" element={<Navigate to="/profile" />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/users" element={<UsersContainer />} />
-            <Route path="/messages" element={<MessagesContainer />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/profile/" />
+            </Route>
+            <Route path="/profile/:userId?">
+              <ProfileContainer />
+            </Route>
+            <Route path="/users">
+              <UsersContainer />
+            </Route>
+            <Route path="/messages">
+              <MessagesContainer />
+            </Route>
+          </Switch>
         </main>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 

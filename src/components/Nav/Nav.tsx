@@ -6,26 +6,17 @@ const Nav = () => {
     <nav className={styles.nav}>
       <ul>
         <li>
-          <NavLink
-            to="/profile"
-            className={({ isActive }) => (isActive ? styles.active : '')}
-          >
+          <NavLink to="/profile" activeClassName={styles.active}>
             Profile
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/users"
-            className={({ isActive }) => (isActive ? styles.active : '')}
-          >
+          <NavLink to="/users" activeClassName={styles.active}>
             Users
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/messages"
-            className={({ isActive }) => (isActive ? styles.active : '')}
-          >
+          <NavLink to="/messages" activeClassName={styles.active}>
             Messages
           </NavLink>
         </li>

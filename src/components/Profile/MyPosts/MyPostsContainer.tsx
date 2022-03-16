@@ -21,10 +21,10 @@ const mapStateToProps = (state: StateType): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   changeNewPostText: (value) => {
-    dispatch(profilePageAC.changeNewPostTextAC(value));
+    dispatch(profilePageAC.changeNewPostText(value));
   },
   addPost: () => {
-    dispatch(profilePageAC.addPostAC());
+    dispatch(profilePageAC.addPost());
   },
 });
 

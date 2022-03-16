@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { StateType } from '../../redux/store';
 import {
   usersPageAC,
@@ -7,32 +6,79 @@ import {
   UsersType,
 } from '../../redux/users-page-reducer';
 import { Users } from './Users';
+import React from 'react';
+import axios from 'axios';
+import { Preloader } from '../common/Preloader/Preloader';
+import { ApiGetReturnType } from '../../types';
 
-export type StateProps = UsersPageType;
-
-export type DispatchProps = {
-  follow: (id: number) => void;
-  unfollow: (id: number) => void;
-  setUsers: (users: UsersType) => void;
+export type DispatchPropsPC = {
+  followUser: (id: number) => void;
+  unfollowUser: (id: number) => void;
 };
 
-const mapStateToProps = (state: StateType) => ({
-  users: state.usersPage.users,
-});
+type DispatchPropsCC = {
+  setUsers: (users: UsersType) => void;
+  setTotalCount: (totalCount: number) => void;
+  setPage: (page: number) => void;
+  setIsFetching: (isFetching: boolean) => void;
+};
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  follow: (id) => {
-    dispatch(usersPageAC.followUserAC(id));
-  },
-  unfollow: (id) => {
-    dispatch(usersPageAC.unfollowUserAC(id));
-  },
-  setUsers: (users) => {
-    dispatch(usersPageAC.setUsersAC(users));
-  },
-});
+class UsersAPI extends React.Component<
+  UsersPageType & DispatchPropsCC & DispatchPropsPC
+> {
+  componentDidMount() {
+    axios
+      .get<ApiGetReturnType<UsersType>>(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.count}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalCount(response.data.totalCount);
+        this.props.setIsFetching(false);
+      });
+  }
 
-export const UsersContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Users);
+  onPageChanged = (page: number) => {
+    if (page === this.props.page) {
+      return;
+    }
+
+    this.props.setPage(page);
+
+    this.props.setIsFetching(true);
+
+    axios
+      .get<ApiGetReturnType<UsersType>>(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setIsFetching(false);
+      });
+  };
+
+  render() {
+    return (
+      <>
+        {this.props.isFetching ? (
+          <Preloader />
+        ) : (
+          <Users
+            count={this.props.count}
+            isFetching={this.props.isFetching}
+            page={this.props.page}
+            totalCount={this.props.totalCount}
+            users={this.props.users}
+            onPageChanged={this.onPageChanged}
+            followUser={this.props.followUser}
+            unfollowUser={this.props.unfollowUser}
+          />
+        )}
+      </>
+    );
+  }
+}
+
+const mapStateToProps = (state: StateType): UsersPageType => state.usersPage;
+
+export const UsersContainer = connect(mapStateToProps, usersPageAC)(UsersAPI);
