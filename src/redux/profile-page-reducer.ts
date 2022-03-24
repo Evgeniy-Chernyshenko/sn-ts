@@ -30,7 +30,7 @@ export type ProfileType = {
   lookingForAJobDescription: string;
   photos: PhotosType;
   userId: number;
-};
+} | null;
 
 type ProfilePageType = {
   newPostText: string;
@@ -61,7 +61,7 @@ const initialState = {
       likesCount: 3,
     },
   ],
-  profile: {} as ProfileType,
+  profile: null,
 };
 
 export const profilePageReducer = (

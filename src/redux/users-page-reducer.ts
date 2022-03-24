@@ -15,6 +15,7 @@ export type UsersPageType = {
   count: number;
   totalCount: number;
   isFetching: boolean;
+  isFolowingProgress: number[];
 };
 
 // type ActionCreatorsType = typeof usersPageAC;
@@ -30,6 +31,7 @@ const initialState = {
   count: 100,
   totalCount: 0,
   isFetching: true,
+  isFolowingProgress: [],
 };
 
 export const usersPageReducer = (
@@ -64,6 +66,14 @@ export const usersPageReducer = (
 
     case 'SET_IS_FETCHING':
       return { ...state, isFetching: action.isFetching };
+
+    case 'TOGGLE_IS_FOLOWING_PROGRESS':
+      return {
+        ...state,
+        isFolowingProgress: action.inProgress
+          ? [...state.isFolowingProgress, action.id]
+          : state.isFolowingProgress.filter((id) => id !== action.id),
+      };
 
     default:
       return state;
@@ -105,6 +115,13 @@ export const usersPageAC = {
     return {
       type: 'SET_IS_FETCHING',
       isFetching,
+    } as const;
+  },
+  toggleIsFolowingProgress: (id: number, inProgress: boolean) => {
+    return {
+      type: 'TOGGLE_IS_FOLOWING_PROGRESS',
+      id,
+      inProgress,
     } as const;
   },
 };

@@ -1,5 +1,4 @@
 import './App.css';
-import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import {
   BrowserRouter as Router,
@@ -10,17 +9,18 @@ import {
 import { MessagesContainer } from './components/Messages/MessagesContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { ProfileContainer } from './components/Profile/ProfileContainer';
+import { HeaderContainer } from './components/Header/HeaderContainer';
 
 const App = () => {
   return (
     <Router>
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Nav />
         <main>
           <Switch>
             <Route exact path="/">
-              <Redirect to="/profile/" />
+              <Redirect to="/profile" />
             </Route>
             <Route path="/profile/:userId?">
               <ProfileContainer />

@@ -47,6 +47,11 @@
   cursor: pointer;
 }
 
+.users button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .pagination {
   margin-top: -10px;
   margin-left: -10px;

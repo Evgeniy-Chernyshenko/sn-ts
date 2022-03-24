@@ -3,7 +3,7 @@ import { Preloader } from '../../common/Preloader/Preloader';
 import styles from './ProfileInfo.module.css';
 
 const ProfileInfo = (props: { profile: ProfileType }) => {
-  if (!Object.keys(props.profile).length) {
+  if (!props.profile) {
     return <Preloader />;
   }
 

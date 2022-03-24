@@ -1,6 +1,6 @@
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
-import { StateType } from '../../../redux/store';
+import { RootStateType } from '../../../redux/store';
 import { Dispatch } from 'redux';
 import { PostsType, profilePageAC } from '../../../redux/profile-page-reducer';
 
@@ -14,7 +14,7 @@ export type DispatchProps = {
   addPost: () => void;
 };
 
-const mapStateToProps = (state: StateType): StateProps => ({
+const mapStateToProps = (state: RootStateType): StateProps => ({
   posts: state.profilePage.posts,
   newPostText: state.profilePage.newPostText,
 });

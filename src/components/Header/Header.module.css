@@ -1,15 +1,42 @@
 .header {
   grid-area: header;
   background-color: #3b5998;
-}
-
-.header a {
-  display: inline-block;
-  margin-left: 10px;
-  height: 50px;
+  display: flex;
+  padding: 0 10px;
+  justify-content: space-between;
 }
 
 .header img {
   height: 100%;
-  display: block;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin: -10px 0 0 -10px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 0 0 10px;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+.meProfile {
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+}
+
+.meProfile img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
 }

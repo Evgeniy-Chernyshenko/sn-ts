@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { StateType } from '../../redux/store';
+import { RootStateType } from '../../redux/store';
 import {
   usersPageAC,
   UsersPageType,
@@ -7,13 +7,13 @@ import {
 } from '../../redux/users-page-reducer';
 import { Users } from './Users';
 import React from 'react';
-import axios from 'axios';
 import { Preloader } from '../common/Preloader/Preloader';
-import { ApiGetReturnType } from '../../types';
+import { usersAPI } from '../../api/api';
 
 export type DispatchPropsPC = {
   followUser: (id: number) => void;
   unfollowUser: (id: number) => void;
+  toggleIsFolowingProgress: (id: number, inProgress: boolean) => void;
 };
 
 type DispatchPropsCC = {
@@ -27,15 +27,13 @@ class UsersAPI extends React.Component<
   UsersPageType & DispatchPropsCC & DispatchPropsPC
 > {
   componentDidMount() {
-    axios
-      .get<ApiGetReturnType<UsersType>>(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.count}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalCount(response.data.totalCount);
-        this.props.setIsFetching(false);
-      });
+    this.props.setIsFetching(true);
+
+    usersAPI.getUsers(this.props.page, this.props.count).then((data) => {
+      this.props.setUsers(data.items);
+      this.props.setTotalCount(data.totalCount);
+      this.props.setIsFetching(false);
+    });
   }
 
   onPageChanged = (page: number) => {
@@ -47,14 +45,10 @@ class UsersAPI extends React.Component<
 
     this.props.setIsFetching(true);
 
-    axios
-      .get<ApiGetReturnType<UsersType>>(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setIsFetching(false);
-      });
+    usersAPI.getUsers(page, this.props.count).then((data) => {
+      this.props.setUsers(data.items);
+      this.props.setIsFetching(false);
+    });
   };
 
   render() {
@@ -72,6 +66,8 @@ class UsersAPI extends React.Component<
             onPageChanged={this.onPageChanged}
             followUser={this.props.followUser}
             unfollowUser={this.props.unfollowUser}
+            isFolowingProgress={this.props.isFolowingProgress}
+            toggleIsFolowingProgress={this.props.toggleIsFolowingProgress}
           />
         )}
       </>
@@ -79,6 +75,7 @@ class UsersAPI extends React.Component<
   }
 }
 
-const mapStateToProps = (state: StateType): UsersPageType => state.usersPage;
+const mapStateToProps = (state: RootStateType): UsersPageType =>
+  state.usersPage;
 
 export const UsersContainer = connect(mapStateToProps, usersPageAC)(UsersAPI);

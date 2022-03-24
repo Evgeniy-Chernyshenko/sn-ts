@@ -5,7 +5,7 @@ import {
   MessageSendersType,
   messagesPageAC,
 } from '../../redux/messages-page-reducer';
-import { StateType } from '../../redux/store';
+import { RootStateType } from '../../redux/store';
 import Messages from './Messages';
 
 export type StateProps = {
@@ -19,7 +19,7 @@ export type DispatchProps = {
   addMessage: () => void;
 };
 
-const mapStateToProps = (state: StateType): StateProps => ({
+const mapStateToProps = (state: RootStateType): StateProps => ({
   newMessageText: state.messagesPage.newMessageText,
   messageSenders: state.messagesPage.messageSenders,
   messageItems: state.messagesPage.messageItems,

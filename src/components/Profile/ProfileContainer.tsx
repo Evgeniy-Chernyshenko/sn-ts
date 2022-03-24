@@ -1,5 +1,5 @@
 import { connect, ConnectedProps } from 'react-redux';
-import { StateType } from '../../redux/store';
+import { RootStateType } from '../../redux/store';
 import { profilePageAC, ProfileType } from '../../redux/profile-page-reducer';
 import React from 'react';
 import Profile from './Profile';
@@ -14,7 +14,7 @@ class ProfileAPI extends React.Component<
   ConnectedProps<typeof connector> & RouteComponentProps<PathParamsType>
 > {
   componentDidMount() {
-    this.props.setProfile({} as ProfileType);
+    this.props.setProfile(null);
 
     axios
       .get<ProfileType>(
@@ -32,7 +32,7 @@ class ProfileAPI extends React.Component<
   }
 }
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: RootStateType) => ({
   profile: state.profilePage.profile,
 });
 
