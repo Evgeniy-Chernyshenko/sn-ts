@@ -1,4 +1,5 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import { profilePageReducer } from './profile-page-reducer';
 import { messagesPageReducer } from './messages-page-reducer';
 import { usersPageReducer } from './users-page-reducer';
@@ -13,7 +14,9 @@ export const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export type DispatchType = typeof store.dispatch;
 
 // @ts-ignore
 window.store = store;

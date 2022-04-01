@@ -1,3 +1,5 @@
+import { profileAPI } from './../api/api';
+import { DispatchType } from './store';
 type PostType = {
   id: number;
   text: string;
@@ -109,4 +111,14 @@ export const profilePageAC = {
     return { type: 'ADD_POST' } as const;
   },
   setProfile: (info: ProfileType) => ({ type: 'SET_INFO', info } as const),
+};
+
+export const profilePageTC = {
+  getProfile: (id: number) => (dispatch: DispatchType) => {
+    dispatch(profilePageAC.setProfile(null));
+
+    profileAPI.getProfile(id).then((data) => {
+      dispatch(profilePageAC.setProfile(data));
+    });
+  },
 };

@@ -3,7 +3,6 @@ import styles from './Users.module.css';
 import defaultUserpic from '../../assets/images/userpic.jpg';
 import { UsersPageType } from '../../redux/users-page-reducer';
 import { Link } from 'react-router-dom';
-import { followAPI } from '../../api/api';
 
 type PropsType = UsersPageType &
   DispatchPropsPC & { onPageChanged: (page: number) => void };
@@ -35,30 +34,14 @@ export const Users = (props: PropsType) => {
             </Link>{' '}
             {u.followed ? (
               <button
-                onClick={() => {
-                  props.toggleIsFolowingProgress(u.id, true);
-
-                  followAPI.unfollow(u.id).then((data) => {
-                    data.resultCode === 0 && props.unfollowUser(u.id);
-
-                    props.toggleIsFolowingProgress(u.id, false);
-                  });
-                }}
+                onClick={() => props.unfollow(u.id)}
                 disabled={!!props.isFolowingProgress.find((id) => id === u.id)}
               >
                 Unfollow
               </button>
             ) : (
               <button
-                onClick={() => {
-                  props.toggleIsFolowingProgress(u.id, true);
-
-                  followAPI.follow(u.id).then((data) => {
-                    data.resultCode === 0 && props.followUser(u.id);
-
-                    props.toggleIsFolowingProgress(u.id, false);
-                  });
-                }}
+                onClick={() => props.follow(u.id)}
                 disabled={!!props.isFolowingProgress.find((id) => id === u.id)}
               >
                 Follow

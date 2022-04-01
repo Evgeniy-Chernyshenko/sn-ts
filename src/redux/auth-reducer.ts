@@ -1,3 +1,5 @@
+import { DispatchType } from './store';
+import { authAPI, profileAPI } from './../api/api';
 import { ProfileType } from './profile-page-reducer';
 
 export type AuthApiResponseType = {
@@ -41,4 +43,20 @@ export const authAC = {
       type: 'SET_USER_DATA',
       payload,
     } as const),
+};
+
+export const authTC = {
+  setAuthData: () => (dispatch: DispatchType) => {
+    authAPI.getMe().then((authData) => {
+      authData.resultCode === 0 &&
+        profileAPI.getProfile(authData.data.id!).then((profileData) => {
+          dispatch(
+            authAC.setUserData({
+              ...authData.data,
+              profile: profileData,
+            })
+          );
+        });
+    });
+  },
 };

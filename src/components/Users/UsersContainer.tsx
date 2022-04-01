@@ -1,39 +1,23 @@
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { RootStateType } from '../../redux/store';
 import {
   usersPageAC,
+  usersPageTC,
   UsersPageType,
-  UsersType,
 } from '../../redux/users-page-reducer';
 import { Users } from './Users';
 import React from 'react';
 import { Preloader } from '../common/Preloader/Preloader';
-import { usersAPI } from '../../api/api';
 
 export type DispatchPropsPC = {
-  followUser: (id: number) => void;
-  unfollowUser: (id: number) => void;
+  follow: (id: number) => void;
+  unfollow: (id: number) => void;
   toggleIsFolowingProgress: (id: number, inProgress: boolean) => void;
 };
 
-type DispatchPropsCC = {
-  setUsers: (users: UsersType) => void;
-  setTotalCount: (totalCount: number) => void;
-  setPage: (page: number) => void;
-  setIsFetching: (isFetching: boolean) => void;
-};
-
-class UsersAPI extends React.Component<
-  UsersPageType & DispatchPropsCC & DispatchPropsPC
-> {
+class UsersAPI extends React.Component<ConnectedProps<typeof connector>> {
   componentDidMount() {
-    this.props.setIsFetching(true);
-
-    usersAPI.getUsers(this.props.page, this.props.count).then((data) => {
-      this.props.setUsers(data.items);
-      this.props.setTotalCount(data.totalCount);
-      this.props.setIsFetching(false);
-    });
+    this.props.getUsers(this.props.page, this.props.count);
   }
 
   onPageChanged = (page: number) => {
@@ -42,13 +26,7 @@ class UsersAPI extends React.Component<
     }
 
     this.props.setPage(page);
-
-    this.props.setIsFetching(true);
-
-    usersAPI.getUsers(page, this.props.count).then((data) => {
-      this.props.setUsers(data.items);
-      this.props.setIsFetching(false);
-    });
+    this.props.getUsers(page, this.props.count);
   };
 
   render() {
@@ -64,8 +42,8 @@ class UsersAPI extends React.Component<
             totalCount={this.props.totalCount}
             users={this.props.users}
             onPageChanged={this.onPageChanged}
-            followUser={this.props.followUser}
-            unfollowUser={this.props.unfollowUser}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
             isFolowingProgress={this.props.isFolowingProgress}
             toggleIsFolowingProgress={this.props.toggleIsFolowingProgress}
           />
@@ -78,4 +56,9 @@ class UsersAPI extends React.Component<
 const mapStateToProps = (state: RootStateType): UsersPageType =>
   state.usersPage;
 
-export const UsersContainer = connect(mapStateToProps, usersPageAC)(UsersAPI);
+const connector = connect(mapStateToProps, {
+  ...usersPageAC,
+  ...usersPageTC,
+});
+
+export const UsersContainer = connector(UsersAPI);

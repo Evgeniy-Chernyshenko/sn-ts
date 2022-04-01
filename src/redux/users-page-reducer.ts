@@ -1,3 +1,6 @@
+import { usersAPI, followAPI } from './../api/api';
+import { DispatchType } from './store';
+
 type UserType = {
   followed: boolean;
   id: number;
@@ -123,5 +126,35 @@ export const usersPageAC = {
       id,
       inProgress,
     } as const;
+  },
+};
+
+export const usersPageTC = {
+  getUsers: (page: number, count: number) => (dispatch: DispatchType) => {
+    dispatch(usersPageAC.setIsFetching(true));
+
+    usersAPI.getUsers(page, count).then((data) => {
+      dispatch(usersPageAC.setUsers(data.items));
+      dispatch(usersPageAC.setTotalCount(data.totalCount));
+      dispatch(usersPageAC.setIsFetching(false));
+    });
+  },
+  follow: (id: number) => (dispatch: DispatchType) => {
+    dispatch(usersPageAC.toggleIsFolowingProgress(id, true));
+
+    followAPI.follow(id).then((data) => {
+      data.resultCode === 0 && dispatch(usersPageAC.followUser(id));
+
+      dispatch(usersPageAC.toggleIsFolowingProgress(id, false));
+    });
+  },
+  unfollow: (id: number) => (dispatch: DispatchType) => {
+    dispatch(usersPageAC.toggleIsFolowingProgress(id, true));
+
+    followAPI.unfollow(id).then((data) => {
+      data.resultCode === 0 && dispatch(usersPageAC.unfollowUser(id));
+
+      dispatch(usersPageAC.toggleIsFolowingProgress(id, false));
+    });
   },
 };
