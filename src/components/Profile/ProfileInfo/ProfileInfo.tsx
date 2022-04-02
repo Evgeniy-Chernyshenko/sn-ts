@@ -1,6 +1,7 @@
 import { ProfileType } from '../../../redux/profile-page-reducer';
 import { Preloader } from '../../common/Preloader/Preloader';
 import styles from './ProfileInfo.module.css';
+import userpic from '../../../assets/images/userpic.jpg';
 
 const ProfileInfo = (props: { profile: ProfileType }) => {
   if (!props.profile) {
@@ -16,7 +17,10 @@ const ProfileInfo = (props: { profile: ProfileType }) => {
       />
 
       <div className={styles.about}>
-        <img src={props.profile.photos.large} alt={props.profile.fullName} />
+        <img
+          src={props.profile.photos.large || userpic}
+          alt={props.profile.fullName}
+        />
         <div>
           <h2>{props.profile.fullName}</h2>
           {props.profile.aboutMe && <p>{props.profile.aboutMe}</p>}

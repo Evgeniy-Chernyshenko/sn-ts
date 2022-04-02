@@ -10,6 +10,7 @@ import { MessagesContainer } from './components/Messages/MessagesContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { ProfileContainer } from './components/Profile/ProfileContainer';
 import { HeaderContainer } from './components/Header/HeaderContainer';
+import { SignIn } from './components/SignIn/SignIn';
 
 const App = () => {
   return (
@@ -30,6 +31,9 @@ const App = () => {
             </Route>
             <Route path="/messages">
               <MessagesContainer />
+            </Route>
+            <Route path="/signin">
+              <SignIn />
             </Route>
           </Switch>
         </main>

@@ -18,11 +18,7 @@ const Header = (props: AuthStateType) => {
             <NavLink to={`/profile`} className={styles.meProfile}>
               {props.login}
               <img
-                src={
-                  props.profile.photos.large
-                    ? props.profile.photos.large
-                    : userpic
-                }
+                src={props.profile.photos.large || userpic}
                 alt={`${props.login!} userpic`}
               />
             </NavLink>

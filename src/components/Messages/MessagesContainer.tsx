@@ -12,6 +12,7 @@ export type StateProps = {
   newMessageText: string;
   messageSenders: MessageSendersType;
   messageItems: MessageItemsType;
+  isAuth: boolean;
 };
 
 export type DispatchProps = {
@@ -23,6 +24,7 @@ const mapStateToProps = (state: RootStateType): StateProps => ({
   newMessageText: state.messagesPage.newMessageText,
   messageSenders: state.messagesPage.messageSenders,
   messageItems: state.messagesPage.messageItems,
+  isAuth: state.auth.isAuth,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

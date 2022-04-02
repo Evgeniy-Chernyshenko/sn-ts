@@ -3,6 +3,7 @@ import styles from './Messages.module.css';
 import MessageSender from './MessageSender/MessageSender';
 import MessageItem from './MessageItem/MessageItem';
 import { DispatchProps, StateProps } from './MessagesContainer';
+import { Redirect } from 'react-router-dom';
 
 type PropsType = StateProps & DispatchProps;
 
@@ -33,6 +34,10 @@ const Messages = (props: PropsType) => {
   const onClickSendMessageHandler = () => {
     props.addMessage();
   };
+
+  if (!props.isAuth) {
+    return <Redirect to="/signin" />;
+  }
 
   return (
     <div className={styles.messages}>
